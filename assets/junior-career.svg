@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+<title id="title">Junior Career</title><desc id="desc">Stylized racing helmet emblem in papaya orange and white.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#202326"/><stop offset="1" stop-color="#090a0b"/></linearGradient>
+ <pattern id="carbon" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 0h6v6H0zM6 6h6v6H6z" fill="#fff" opacity=".025"/><path d="M6 0h6v6H6zM0 6h6v6H0z" fill="#000" opacity=".25"/></pattern>
+</defs>
+<circle cx="160" cy="145" r="125" fill="url(#bg)" stroke="#ff8000" stroke-width="5"/>
+<circle cx="160" cy="145" r="116" fill="url(#carbon)"/>
+<g stroke-linecap="round" stroke-linejoin="round">
+ <path d="M83 158c0-49 35-83 83-83 43 0 75 28 75 68 0 18-8 34-24 46l-18 13H99c-10-10-16-25-16-44z" fill="#f1f1ef" stroke="#ff8000" stroke-width="7"/>
+ <path d="M111 151c13-19 36-31 63-31h46c-1 24-16 44-39 53l-70 14" fill="#17191b" stroke="#ff8000" stroke-width="6"/>
+ <path d="M96 202h125l-17 20H111z" fill="#ff8000" stroke="#ff8000" stroke-width="4"/>
+ <path d="M132 91l-15 20m42-31-8 22m39-17-3 17" stroke="#ff8000" stroke-width="5"/>
+ <path d="M102 175l-10 19m127-1 12 10" stroke="#f1f1ef" stroke-width="5"/>
+</g>
+<text x="160" y="282" fill="#f5f5f5" font-family="Arial,sans-serif" font-size="18" font-weight="800" letter-spacing="2.2" text-anchor="middle">JUNIOR CAREER</text>
+</svg>
