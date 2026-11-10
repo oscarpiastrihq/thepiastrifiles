@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08090a">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+<title>Karting — The Piastri Files</title>
+<style>
+:root{--bg:#08090a;--panel:#111214;--panel2:#17181b;--text:#f5f5f3;--muted:#9b9da2;--line:#2b2d31;--papaya:#ff8000;--papaya-soft:#ff9b3d;--max:1440px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.5;position:relative;isolation:isolate}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,rgba(255,128,0,.065),transparent 40%),repeating-linear-gradient(135deg,rgba(255,255,255,.02) 0 1px,transparent 1px 5px),#08090a;opacity:.6}
+a{color:inherit}.site-shell{max-width:1440px;margin:0 auto;padding:0 clamp(16px,4vw,58px)}
+.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}.brand-mark{width:36px;height:36px;display:grid;place-items:center;background:var(--papaya);color:#101010;font-size:13px;font-weight:1000;letter-spacing:-.08em}
+.brand-name{font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}.brand-sub{display:block;color:var(--muted);font-size:9px;font-weight:600;letter-spacing:.16em;margin-top:3px}
+.top-meta{font-size:10px;color:#b9b9bb;letter-spacing:.15em;text-transform:uppercase}.top-meta b{color:var(--papaya)}
+
+
+/* Compact floating career navigation — icon-only emblems, labels remain HTML text */
+.archive-nav{
+  position:fixed;
+  z-index:1000;
+  top:50%;
+  right:clamp(12px,calc((100vw - 1440px)/2 - 66px),90px);
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:13px;
+  width:58px;
+  padding:12px 7px;
+  border:1px solid rgba(255,128,0,.28);
+  background:linear-gradient(180deg,rgba(18,19,21,.96),rgba(7,8,9,.94));
+  box-shadow:0 8px 28px rgba(0,0,0,.42),inset 0 0 18px rgba(255,128,0,.025);
+  backdrop-filter:blur(12px);
+}
+.archive-nav:before,.archive-nav:after{
+  content:"";position:absolute;width:9px;height:9px;border-color:var(--papaya);
+  border-style:solid;pointer-events:none
+}
+.archive-nav:before{top:-1px;left:-1px;border-width:1px 0 0 1px}
+.archive-nav:after{right:-1px;bottom:-1px;border-width:0 1px 1px 0}
+.archive-nav-heading{display:none}
+.archive-nav-track{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}\n.archive-nav-track:before{content:"";position:absolute;z-index:0;top:20px;bottom:20px;left:50%;width:1px;transform:translateX(-50%);background:linear-gradient(180deg,transparent,rgba(255,128,0,.72),rgba(255,128,0,.72),transparent)}
+.archive-nav-link{
+  position:relative;display:grid;place-items:center;width:42px;height:42px;
+  color:var(--text);text-decoration:none;border:1px solid #45413b;
+  border-radius:50%;background:linear-gradient(145deg,#202124,#0c0d0e);
+  transition:transform .28s cubic-bezier(.2,.7,.2,1),border-color .28s,box-shadow .28s,background .28s;
+  outline:none;
+}
+.archive-nav-link:before{
+  content:"";position:absolute;inset:-4px;border:1px solid transparent;border-radius:50%;
+  transition:border-color .28s,transform .28s;pointer-events:none
+}
+.archive-nav-link:hover,.archive-nav-link:focus-visible{
+  transform:translateX(-4px) scale(1.08);border-color:var(--papaya);
+  background:linear-gradient(145deg,#29231d,#111214);
+  box-shadow:0 0 18px rgba(255,128,0,.2),inset 0 0 12px rgba(255,128,0,.08);
+}
+.archive-nav-link:hover:before,.archive-nav-link:focus-visible:before{border-color:rgba(255,128,0,.42);transform:scale(1.08)}
+.archive-nav-link:active{transform:scale(.94)}
+.archive-nav-icon{display:block;width:25px;height:25px;overflow:visible;transition:transform .28s,filter .28s}
+.archive-nav-link:hover .archive-nav-icon,.archive-nav-link:focus-visible .archive-nav-icon{
+  transform:scale(1.1);filter:drop-shadow(0 0 5px rgba(255,128,0,.55))
+}
+.archive-nav-link[aria-current="page"]{border-color:var(--papaya);box-shadow:0 0 13px rgba(255,128,0,.16)}
+.archive-nav-link[aria-current="page"]:before{border-color:rgba(255,128,0,.42)}
+.archive-nav-label{
+  position:absolute;right:calc(100% + 12px);top:50%;transform:translate(7px,-50%);
+  padding:7px 10px;border:1px solid rgba(255,128,0,.45);background:#111315;
+  color:#f5f5f3;font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;
+  white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.4);
+  transition:opacity .2s,transform .2s,visibility .2s;
+}
+.archive-nav-label:after{
+  content:"";position:absolute;left:100%;top:50%;width:6px;height:6px;
+  border-top:1px solid rgba(255,128,0,.45);border-right:1px solid rgba(255,128,0,.45);
+  background:#111315;transform:translate(-3px,-50%) rotate(45deg)
+}
+.archive-nav-link:hover .archive-nav-label,.archive-nav-link:focus-visible .archive-nav-label{
+  opacity:1;visibility:visible;transform:translate(0,-50%)
+}
+.archive-nav-link[aria-current="page"] .archive-nav-icon{filter:drop-shadow(0 0 5px rgba(255,128,0,.35))}
+.archive-nav-link.is-entering{animation:nav-rail-arrive .65s cubic-bezier(.2,.7,.2,1) both}
+.archive-nav-link:nth-child(2).is-entering{animation-delay:.09s}
+.archive-nav-link:nth-child(3).is-entering{animation-delay:.18s}
+@keyframes nav-rail-arrive{from{opacity:0;transform:translateX(12px) scale(.88)}to{opacity:1;transform:translateX(0) scale(1)}}
+@media(max-width:900px){
+  .archive-nav{
+    top:auto;bottom:calc(10px + env(safe-area-inset-bottom));right:50%;transform:translateX(50%);
+    width:auto;max-width:calc(100vw - 24px);padding:7px 13px;
+    border-radius:14px;flex-direction:row;gap:0;
+    box-shadow:0 8px 28px rgba(0,0,0,.58),0 0 18px rgba(255,128,0,.07)
+  }
+  .archive-nav-track{flex-direction:row;gap:clamp(12px,5vw,25px)}
+  .archive-nav-link{width:auto;height:auto;min-width:68px;padding:3px 5px 2px;border-color:transparent;background:transparent;box-shadow:none;display:flex;flex-direction:column;gap:3px;border-radius:8px}
+  .archive-nav-link:hover,.archive-nav-link:focus-visible{transform:translateY(-3px);background:rgba(255,128,0,.07);box-shadow:none}
+  .archive-nav-link:before{display:none}
+  .archive-nav-icon{width:25px;height:25px}
+  .archive-nav-label{
+    position:static;right:auto;top:auto;bottom:auto;transform:none;opacity:1;visibility:visible;
+    padding:0;border:0;background:transparent;box-shadow:none;color:#aeb0b4;
+    font-size:7px;letter-spacing:.08em;text-align:center
+  }
+  .archive-nav-label:after{display:none}
+  .archive-nav-link[aria-current="page"] .archive-nav-label{color:var(--papaya)}
+  body{padding-bottom:82px}
+}
+@media(prefers-reduced-motion:reduce){
+  .archive-nav-link,.archive-nav-icon,.archive-nav-label,.archive-nav-link:before{transition:none!important}
+  .archive-nav-link.is-entering{animation:none!important}
+}
+
+page-intro{padding:clamp(34px,6vw,72px) 0 22px;border-bottom:2px solid var(--papaya);display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.eyebrow{color:var(--papaya);font-size:10px;font-weight:900;letter-spacing:.24em;text-transform:uppercase}
+h1{margin:10px 0 0;font-size:clamp(38px,6vw,76px);line-height:.95;letter-spacing:-.065em;text-transform:uppercase}h1 span{color:var(--papaya)}
+.page-note{max-width:340px;color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-align:right}
+.section-kicker{margin:25px 0 10px;color:var(--papaya);font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}
+.tab{min-width:90px;padding:11px 15px;border:1px solid #3c3e42;background:transparent;color:#d6d6d7;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;transition:all .25s ease}
+.tab:hover{border-color:var(--papaya);transform:translateY(-1px)}.tab[aria-pressed=true]{background:var(--papaya);border-color:var(--papaya);color:#101010;box-shadow:0 0 16px rgba(255,128,0,.13)}
+.panel{border:1px solid #2d2f33;background:linear-gradient(110deg,#151619,#101113);padding:clamp(16px,3vw,26px);margin:18px 0 24px;position:relative}
+.panel:before,.panel:after{content:"";position:absolute;width:10px;height:10px;border-color:var(--papaya);border-style:solid}.panel:before{top:-1px;left:-1px;border-width:1px 0 0 1px}.panel:after{right:-1px;bottom:-1px;border-width:0 1px 1px 0}
+.panel h2{margin:0;color:#fff;font-size:clamp(20px,3vw,30px);letter-spacing:-.04em}.panel h2 span{color:var(--papaya)}
+.panel-sub{margin:5px 0 18px;color:var(--muted);font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#303236;border:1px solid #303236}
+.stat{background:#111214;padding:16px;min-height:96px}.stat strong{display:block;color:var(--papaya);font-family:"Black Ops One",Impact,sans-serif;font-size:23px;line-height:1.1}.stat span{display:block;margin-top:7px;color:#aeb0b4;font-size:8px;letter-spacing:.12em;text-transform:uppercase}
+.placeholder{padding:22px;border:1px dashed #51402e;background:rgba(255,128,0,.035);color:#bfc0c3;font-size:11px;line-height:1.7}
+.placeholder strong{display:block;margin-bottom:5px;color:var(--papaya);font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+.table-wrap{overflow-x:auto;margin-top:18px}table{width:100%;min-width:600px;border-collapse:collapse;font-size:11px}th,td{padding:12px 10px;border-bottom:1px solid #292b2f;text-align:center}th{background:#1b1d20;color:#b8bbc0;font-size:8px;letter-spacing:.1em;text-transform:uppercase}td{color:#e2e2e3}td:first-child{color:var(--papaya);font-weight:900}
+.footer{margin-top:56px;padding:24px 0 38px;border-top:1px solid var(--line);color:#898b90;font-size:10px;line-height:1.8}.footer strong{color:var(--papaya);letter-spacing:.12em}.footer-bottom{display:flex;justify-content:space-between;gap:18px;margin-top:20px;padding-top:14px;border-top:1px solid #242629;color:#66686d;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+@media(max-width:700px){.topbar{height:64px}.top-meta{font-size:8px}.page-intro{align-items:flex-start;flex-direction:column}.page-note{text-align:left}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tab{flex:1;min-width:calc(33.333% - 8px);padding:10px 8px;font-size:9px}.footer-bottom{flex-direction:column;gap:5px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* Karting photo slider */
+.karting-slider{position:relative;margin:26px 0 34px;border:1px solid rgba(255,128,0,.38);background:#090a0b;overflow:hidden;box-shadow:0 18px 48px rgba(0,0,0,.34)}
+.karting-slider:before,.karting-slider:after{content:"";position:absolute;z-index:3;width:14px;height:14px;border-color:var(--papaya);border-style:solid;pointer-events:none}
+.karting-slider:before{top:0;left:0;border-width:2px 0 0 2px}
+.karting-slider:after{right:0;bottom:0;border-width:0 2px 2px 0}
+.karting-slider-viewport{position:relative;aspect-ratio:16/7;min-height:250px;max-height:620px;background:#050607;overflow:hidden}
+.karting-slide{position:absolute;inset:0;display:grid;place-items:center;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility .7s ease}
+.karting-slide.is-active{opacity:1;visibility:visible}
+.karting-slide img{display:block;width:100%;height:100%;object-fit:contain}
+.karting-slider-shade{position:absolute;inset:auto 0 0;height:34%;background:linear-gradient(transparent,rgba(0,0,0,.68));pointer-events:none}
+.karting-slider-caption{position:absolute;left:clamp(18px,4vw,42px);bottom:clamp(16px,3vw,30px);z-index:2;color:#fff;text-shadow:0 2px 12px #000;font-size:clamp(9px,1.1vw,12px);font-weight:900;letter-spacing:.2em;text-transform:uppercase}
+.karting-slider-controls{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 14px;pointer-events:none;z-index:4}
+.karting-slider-arrow{pointer-events:auto;display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(255,128,0,.65);border-radius:50%;background:rgba(8,9,10,.72);color:#fff;font-size:22px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.karting-slider-arrow:hover{background:var(--papaya);border-color:var(--papaya);color:#101010;transform:scale(1.07)}
+.karting-slider-bottom{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 18px;border-top:1px solid #292b2f;background:linear-gradient(90deg,#151619,#0d0e10)}
+.karting-slider-dots{display:flex;align-items:center;gap:8px}
+.karting-slider-dot{width:7px;height:7px;padding:0;border:1px solid #777;background:transparent;border-radius:50%;cursor:pointer;transition:all .25s}
+.karting-slider-dot[aria-current="true"]{width:22px;border-color:var(--papaya);border-radius:8px;background:var(--papaya)}
+.karting-slider-count{color:#aeb0b4;font-size:9px;font-weight:900;letter-spacing:.16em;font-variant-numeric:tabular-nums}
+.karting-slider-count span{color:var(--papaya)}
+@media(max-width:700px){.karting-slider-viewport{aspect-ratio:4/3;min-height:220px}.karting-slider-controls{padding:0 8px}.karting-slider-arrow{width:36px;height:36px}.karting-slider-bottom{padding:11px 13px}}
+@media(prefers-reduced-motion:reduce){.karting-slide,.karting-slider-arrow,.karting-slider-dot{transition:none!important}}
+
+</style>
+</head>
+<body><div class="site-shell">
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">81</span><span class="brand-name">The Piastri Files<span class="brand-sub">Formula One career archive</span></span></a><div class="top-meta"><b>Oscar Piastri</b> &nbsp;·&nbsp; McLaren</div></header>
+<nav class="archive-nav" aria-label="Career archive sections">
+  <div class="archive-nav-track">
+    <a class="archive-nav-link" href="karting.html" aria-label="Karting" title="Karting" aria-current="page">
+      <svg class="archive-nav-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M5 18h4l3-5h9l4 3h3v5H5v-3Z" stroke="#f5f5f3" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 13l2-4h6l2 4M8 21a2.5 2.5 0 1 0 5 0m7 0a2.5 2.5 0 1 0 5 0" stroke="#ff8000" stroke-width="1.8" stroke-linecap="round"/><path d="M14 16h5" stroke="#ff8000" stroke-width="1.8" stroke-linecap="round"/></svg><span class="archive-nav-label">Karting</span>
+    </a>
+    <a class="archive-nav-link" href="junior-career.html" aria-label="Junior Formula" title="Junior Formula">
+      <svg class="archive-nav-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M5 17.2C5 10.5 10.1 5.5 17.1 5.5c6.2 0 10.4 4.1 10.4 10.1v2.2c0 1.3-.9 2.2-2.2 2.2H13.8c-1.4 0-2.5-.5-3.3-1.4l-2.2 5.1H5.8c-.7 0-1.2-.6-1.2-1.3v-5.2Z" stroke="#f5f5f3" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 18.6c4.5-.2 10.1-1.6 15.5-5.2M8.3 23.7l-2.2 2.1M13 26.5h10.8" stroke="#ff8000" stroke-width="2" stroke-linecap="round"/><path d="M18.5 7.4c-3.9.1-7.1 2.6-8.1 6.2" stroke="#ff8000" stroke-width="1.4" stroke-linecap="round"/></svg><span class="archive-nav-label">Junior Formula</span>
+    </a>
+    <a class="archive-nav-link" href="index.html" aria-label="F1 Archive" title="F1 Archive">
+      <svg class="archive-nav-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M7 4v24M8 5h16l-4.1 5.1L24 15H8" stroke="#f5f5f3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 7h4v3h-4zM18 7h4v3h-4zM14 10h4v3h-4z" fill="#ff8000"/><path d="M7 28h19" stroke="#ff8000" stroke-width="1.8" stroke-linecap="round"/></svg><span class="archive-nav-label">F1 Archive</span>
+    </a>
+    <a class="archive-nav-link" href="career-achievements.html" aria-label="Achievements" title="Achievements">
+      <svg class="archive-nav-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 5h12v3.2c0 6.3-2.4 10.1-6 10.1s-6-3.8-6-10.1V5Z" stroke="#f5f5f3" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 8H6.5v2.5c0 3.6 2.1 5.4 5.1 5.7M22 8h3.5v2.5c0 3.6-2.1 5.4-5.1 5.7" stroke="#ff8000" stroke-width="1.8" stroke-linecap="round"/><path d="M16 18.5v5M11.5 27h9M13 23.5h6l1.5 3.5h-9l1.5-3.5Z" stroke="#ff8000" stroke-width="1.8" stroke-linejoin="round"/><path d="m16 7 1.1 2.2 2.4.3-1.8 1.7.5 2.4-2.2-1.2-2.2 1.2.5-2.4-1.8-1.7 2.4-.3L16 7Z" fill="#ff8000"/></svg><span class="archive-nav-label">Achievements</span>
+    </a>
+  </div>
+</nav>
+<main>
+<section class="page-intro"><div><div class="eyebrow">The beginning of the journey</div><h1>Karting <span>Career</span></h1></div><p class="page-note">Oakleigh beginnings · Australian karting · International competition</p></section>
+
+<section class="karting-slider" aria-label="Oscar Piastri karting photo gallery" data-autoplay="5000">
+  <div class="karting-slider-viewport">
+    <div class="karting-slide is-active" aria-hidden="false">
+      <img src="assets/karting/karting-01-portrait.webp" alt="Young Oscar Piastri in his karting race suit" fetchpriority="high">
+      <div class="karting-slider-shade"></div><div class="karting-slider-caption">The early years · Oscar Piastri</div>
+    </div>
+    <div class="karting-slide" aria-hidden="true">
+      <img src="assets/karting/karting-02-wave.jpg" alt="Oscar Piastri waving from kart number 81" loading="lazy">
+      <div class="karting-slider-shade"></div><div class="karting-slider-caption">Kart number 81</div>
+    </div>
+    <div class="karting-slide" aria-hidden="true">
+      <img src="assets/karting/karting-03-front.jpg" alt="Oscar Piastri driving his number 81 kart" loading="lazy">
+      <div class="karting-slider-shade"></div><div class="karting-slider-caption">On track</div>
+    </div>
+    <div class="karting-slide" aria-hidden="true">
+      <img src="assets/karting/karting-04-track.jpg" alt="Oscar Piastri racing in karting" loading="lazy">
+      <div class="karting-slider-shade"></div><div class="karting-slider-caption">Race day</div>
+    </div>
+    <div class="karting-slide" aria-hidden="true">
+      <img src="assets/karting/karting-05-helmet.jpg" alt="Close-up of Oscar Piastri wearing his karting helmet" loading="lazy">
+      <div class="karting-slider-shade"></div><div class="karting-slider-caption">Before the next chapter</div>
+    </div>
+    <div class="karting-slider-controls">
+      <button class="karting-slider-arrow" type="button" data-prev aria-label="Previous photo">‹</button>
+      <button class="karting-slider-arrow" type="button" data-next aria-label="Next photo">›</button>
+    </div>
+  </div>
+  <div class="karting-slider-bottom">
+    <div class="karting-slider-dots" aria-label="Choose photo">
+      <button class="karting-slider-dot" type="button" aria-label="Photo 1" aria-current="true"></button>
+      <button class="karting-slider-dot" type="button" aria-label="Photo 2" aria-current="false"></button>
+      <button class="karting-slider-dot" type="button" aria-label="Photo 3" aria-current="false"></button>
+      <button class="karting-slider-dot" type="button" aria-label="Photo 4" aria-current="false"></button>
+      <button class="karting-slider-dot" type="button" aria-label="Photo 5" aria-current="false"></button>
+    </div>
+    <div class="karting-slider-count"><span data-current>01</span> / 05</div>
+  </div>
+</section>
+
+<div class="section-kicker">Early years</div>
+<section class="panel">
+<h2>First steps in <span>karting</span></h2>
+<p class="panel-sub">2011 · Oakleigh Go Kart Racing Club · Australia</p>
+<div class="placeholder"><strong>2011 — The beginning</strong>Motorsport Australia records that Oscar began competing at Oakleigh Go Kart Racing Club in 2011, aged 10. Individual race classifications and lap times for this year have not yet been confirmed from available protocols.</div>
+</section>
+<div class="section-kicker">Verified race records</div>
+<section class="panel">
+<h2>2012 <span>Season</span></h2>
+<p class="panel-sub">Rookies category · Oakleigh Go Kart Racing Club records</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Event</th><th>Class</th><th>Recorded result</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Junior Sprint Classic</td><td>Rookies C &amp; D</td><td><strong>1st</strong></td><td><a href="https://ogkrc.com.au/2012/09/results-2012-junior-sprint-classic/" target="_blank" rel="noopener">OGKRC results ↗</a></td></tr>
+<tr><td>OGKRC Class Titles</td><td>Rookies</td><td><strong>1st</strong></td><td><a href="https://ogkrc.com.au/2012/10/results-ogkrc-class-titles-2012/" target="_blank" rel="noopener">OGKRC results ↗</a></td></tr>
+<tr><td>June Club Day</td><td>Rookies</td><td><strong>2nd</strong> in overall points</td><td><a href="https://ogkrc.com.au/2012/06/the-griffiths-report-june-club-day-2012/" target="_blank" rel="noopener">OGKRC report ↗</a></td></tr>
+<tr><td>September Club Day</td><td>Rookies</td><td><strong>1st</strong> in overall points</td><td><a href="https://ogkrc.com.au/2012/10/the-griffiths-report-september-club-day-2012/" target="_blank" rel="noopener">OGKRC report ↗</a></td></tr>
+<tr><td>November Club Day</td><td>Rookies</td><td><strong>1st</strong> in overall points</td><td><a href="https://ogkrc.com.au/2012/11/the-griffiths-report-november-club-day-2012/" target="_blank" rel="noopener">OGKRC report ↗</a></td></tr>
+</tbody></table></div>
+</section>
+<div class="section-kicker">Sources &amp; verification</div>
+<section class="panel">
+<h2>Research <span>notes</span></h2>
+<div class="placeholder"><strong>Scope of the current record</strong>The results above are taken from Oakleigh Go Kart Racing Club's published event results and race reports. They are not presented as a complete national championship record. Exact event dates, qualifying times, heat-by-heat classifications and final protocols will only be added after they are confirmed in the relevant official archive.</div>
+<p class="panel-sub" style="margin-top:16px"><a href="https://motorsport.org.au/media/news/detail/2026/03/02/from-protege-to-papaya-oscar-piastri/" target="_blank" rel="noopener">Motorsport Australia — Oscar Piastri profile ↗</a></p>
+<p class="panel-sub"><a href="https://cms.karting.net.au/cms/results/view" target="_blank" rel="noopener">Karting Australia historical results portal ↗</a></p>
+</section>
+</main>
+<footer class="footer"><strong>DATA ACCURACY &amp; SOURCES</strong><p>Only results supported by published club records or official championship documentation are included. Missing protocols and unverified timings are not estimated.</p><div class="footer-bottom"><span>Independent fan archive</span><span>Not affiliated with any championship or team</span></div></footer>
+</div><script>document.querySelectorAll(".archive-nav-link").forEach(link=>link.classList.add("is-entering"));</script>
+<script>
+(function(){
+  const slider=document.querySelector('.karting-slider');
+  if(!slider) return;
+  const slides=[...slider.querySelectorAll('.karting-slide')];
+  const dots=[...slider.querySelectorAll('.karting-slider-dot')];
+  const current=slider.querySelector('[data-current]');
+  const delay=Number(slider.dataset.autoplay)||5000;
+  let index=0,timer=null,touchStartX=0;
+  const show=(next)=>{
+    index=(next+slides.length)%slides.length;
+    slides.forEach((slide,i)=>{const active=i===index;slide.classList.toggle('is-active',active);slide.setAttribute('aria-hidden',String(!active));});
+    dots.forEach((dot,i)=>dot.setAttribute('aria-current',String(i===index)));
+    current.textContent=String(index+1).padStart(2,'0');
+  };
+  const stop=()=>{if(timer){clearInterval(timer);timer=null;}};
+  const start=()=>{stop();if(!document.hidden&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(()=>show(index+1),delay);};
+  slider.querySelector('[data-prev]').addEventListener('click',()=>{show(index-1);start();});
+  slider.querySelector('[data-next]').addEventListener('click',()=>{show(index+1);start();});
+  dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);start();}));
+  slider.addEventListener('mouseenter',stop);
+  slider.addEventListener('mouseleave',start);
+  slider.addEventListener('focusin',stop);
+  slider.addEventListener('focusout',start);
+  document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+  slider.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].clientX;},{passive:true});
+  slider.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-touchStartX;if(Math.abs(dx)>45){show(index+(dx<0?1:-1));start();}},{passive:true});
+  show(0);start();
+})();
+</script>
+
+</body></html>
