@@ -135,8 +135,9 @@ h1{margin:10px 0 0;font-size:clamp(38px,6vw,76px);line-height:.95;letter-spacing
 .table-wrap{overflow-x:auto;margin-top:18px}table{width:100%;min-width:600px;border-collapse:collapse;font-size:11px}th,td{padding:12px 10px;border-bottom:1px solid #292b2f;text-align:center}th{background:#1b1d20;color:#b8bbc0;font-size:8px;letter-spacing:.1em;text-transform:uppercase}td{color:#e2e2e3}td:first-child{color:var(--papaya);font-weight:900}
 .footer{margin-top:56px;padding:24px 0 38px;border-top:1px solid var(--line);color:#898b90;font-size:10px;line-height:1.8}.footer strong{color:var(--papaya);letter-spacing:.12em}.footer-bottom{display:flex;justify-content:space-between;gap:18px;margin-top:20px;padding-top:14px;border-top:1px solid #242629;color:#66686d;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
 @media(max-width:700px){.topbar{height:64px}.top-meta{font-size:8px}.page-intro{align-items:flex-start;flex-direction:column}.page-note{text-align:left}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tab{flex:1;min-width:calc(33.333% - 8px);padding:10px 8px;font-size:9px}.footer-bottom{flex-direction:column;gap:5px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
-
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
 
 /* Karting hero slider — wide F1-style frame */
 .karting-slider{position:relative;width:100%;margin:26px auto 34px;border:1px solid rgba(255,128,0,.38);background:#090a0b;overflow:hidden;box-shadow:0 18px 48px rgba(0,0,0,.34)}
@@ -181,7 +182,13 @@ h1{margin:10px 0 0;font-size:clamp(38px,6vw,76px);line-height:.95;letter-spacing
  .karting-slider-caption{max-width:70%;font-size:9px}
  .karting-slider-bottom{padding:11px 13px}
 }
-@media(prefers-reduced-motion:reduce){.karting-slide,.karting-slider-arrow,.karting-slider-dot,.karting-motion-line svg{transition:none!important;animation:none!important}}
+@media(prefers-reduced-motion:reduce){
+  .karting-slide,
+  .karting-slider-arrow,
+  .karting-slider-dot{
+    transition:none!important;
+  }
+}
 
 </style>
 </head>
@@ -328,7 +335,12 @@ h1{margin:10px 0 0;font-size:clamp(38px,6vw,76px);line-height:.95;letter-spacing
     current.textContent=String(index+1).padStart(2,'0');
   };
   const stop=()=>{if(timer){clearInterval(timer);timer=null;}};
-  const start=()=>{stop();if(!document.hidden&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(()=>show(index+1),delay);};
+  const start=()=>{
+  stop();
+  if(!document.hidden){
+    timer=setInterval(()=>show(index+1),delay);
+  }
+};
   slider.querySelector('[data-prev]').addEventListener('click',()=>{show(index-1);start();});
   slider.querySelector('[data-next]').addEventListener('click',()=>{show(index+1);start();});
   dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);start();}));
